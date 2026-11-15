@@ -1,177 +1,83 @@
-<!DOCTYPE html>
-<html lang="da">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
 
-<title>2. december ❤️</title>
-
-<style>
-
-*{
-    box-sizing:border-box;
+function openImage() {
+    document
+        .getElementById("lightbox")
+        .style.display = "flex";
 }
 
-body{
-    margin:0;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Georgia, serif;
-    color:white;
-    text-align:center;
-    padding:20px;
-    overflow-x:hidden;
-
-    background:
-    radial-gradient(circle at top,
-    #b71c1c 0%,
-    #7f0000 45%,
-    #3e0000 100%);
+function closeImage() {
+    document
+        .getElementById("lightbox")
+        .style.display = "none";
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
+document.getElementById("content").innerHTML = `
 
-    background-image:
-    radial-gradient(white 2px, transparent 2px),
-    radial-gradient(white 1px, transparent 1px);
+<div class="card">
 
-    background-size:
-    120px 120px,
-    80px 80px;
+    <div class="heart">❤️</div>
 
-    opacity:.25;
+    <div class="subtitle">
+        🎄 Julen med Dig 🎄
+    </div>
 
-    animation:snow 20s linear infinite;
+    <h1>2. december</h1>
 
-    pointer-events:none;
-}
+    <img
+        src="images/IMG_20190713_203913.jpg"
+        alt="Et særligt minde"
+        class="photo"
+        onclick="openImage()">
 
-.card{
+    <div class="photo-text">
+        📸 Tryk på billedet for at se det i fuld størrelse
+    </div>
 
-    max-width:800px;
-    width:100%;
+    <div class="message">
 
-    background:rgba(255,255,255,.12);
+        Når jeg ser dette billede,
+        bliver jeg mindet om,
+        hvor mange gode minder vi allerede har skabt sammen.
 
-    backdrop-filter:blur(10px);
+        <br><br>
 
-    border:2px solid rgba(255,215,0,.35);
+        Noget af det jeg beundrer mest ved dig,
+        er den styrke og varme,
+        du møder livet med.
 
-    border-radius:30px;
+        <br><br>
 
-    padding:40px;
+        Du gør vores hverdag bedre,
+        vores hjem hyggeligere
+        og mit liv rigere.
 
-    box-shadow:
-    0 0 20px rgba(255,215,0,.15),
-    0 10px 40px rgba(0,0,0,.4);
+        <br><br>
 
-    position:relative;
-}
+        Jeg glæder mig til alle de minder,
+        vi endnu ikke har skabt.
 
-.card::before{
-    content:"🎄";
-    position:absolute;
-    left:25px;
-    top:20px;
-    font-size:2rem;
-}
+    </div>
 
-.card::after{
-    content:"🎄";
-    position:absolute;
-    right:25px;
-    top:20px;
-    font-size:2rem;
-}
+    <div class="signature">
+        Jeg elsker dig ❤️<br>
+        Tobias
+    </div>
 
-h1{
-    color:#ffe082;
-    margin-bottom:15px;
-}
+    <div class="footer-icons">
+        🎄 ❤️ 🎁 ❤️ 🎄
+    </div>
 
-.subtitle{
-    color:#ffe082;
-    margin-bottom:25px;
-}
+</div>
+`;
 
-.heart{
-    font-size:4rem;
-    animation:pulse 2s infinite;
-}
+document.getElementById("lightbox")
+.addEventListener("click", function(e) {
 
-.lock{
-    font-size:5rem;
-}
+    if (e.target === this) {
+        closeImage();
+    }
 
-.photo{
-    max-width:320px;
-    width:100%;
+});
 
-    border-radius:20px;
-
-    border:4px solid rgba(255,215,0,.4);
-
-    margin:20px 0;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-    0 0 20px rgba(255,215,0,.3);
-}
-
-.photo:hover{
-    transform:scale(1.03);
-}
-
-.photo-text{
-    font-size:.9rem;
-    opacity:.8;
-    color:#ffe082;
-}
-
-.message{
-    font-size:1.25rem;
-    line-height:1.9;
-    margin-top:20px;
-}
-
-.signature{
-    margin-top:30px;
-    font-style:italic;
-    color:#ffe082;
-}
-
-.countdown{
-    margin-top:25px;
-    padding:20px;
-    border-radius:20px;
-    background:rgba(255,215,0,.10);
-    border:1px solid rgba(255,215,0,.3);
-}
-
-.footer-icons{
-    margin-top:30px;
-    font-size:1.4rem;
-    letter-spacing:8px;
-}
-
-.lightbox{
-
-    display:none;
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.95);
-
-    z-index:9999;
-
-    justify-content:
+</script>
