@@ -1,83 +1,67 @@
-<script>
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-function openImage() {
-    document
-        .getElementById("lightbox")
-        .style.display = "flex";
+<title>2. december ❤️</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
 }
 
-function closeImage() {
-    document
-        .getElementById("lightbox")
-        .style.display = "none";
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Georgia, serif;
+    color:white;
+    text-align:center;
+    padding:20px;
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(circle at top,
+    #b71c1c 0%,
+    #7f0000 45%,
+    #3e0000 100%);
 }
 
-document.getElementById("content").innerHTML = `
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
 
-<div class="card">
+    background-image:
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 1px, transparent 1px);
 
-    <div class="heart">❤️</div>
+    background-size:
+    120px 120px,
+    80px 80px;
 
-    <div class="subtitle">
-        🎄 Julen med Dig 🎄
-    </div>
+    opacity:.25;
+    animation:snow 20s linear infinite;
+    pointer-events:none;
+}
 
-    <h1>2. december</h1>
+.card{
 
-    <img
-        src="images/IMG_20190713_203913.jpg"
-        alt="Et særligt minde"
-        class="photo"
-        onclick="openImage()">
+    max-width:800px;
+    width:100%;
 
-    <div class="photo-text">
-        📸 Tryk på billedet for at se det i fuld størrelse
-    </div>
+    background:rgba(255,255,255,.12);
 
-    <div class="message">
+    backdrop-filter:blur(10px);
 
-        Når jeg ser dette billede,
-        bliver jeg mindet om,
-        hvor mange gode minder vi allerede har skabt sammen.
+    border:2px solid rgba(255,215,0,.35);
 
-        <br><br>
+    border-radius:30px;
 
-        Noget af det jeg beundrer mest ved dig,
-        er den styrke og varme,
-        du møder livet med.
+    padding:40px;
 
-        <br><br>
-
-        Du gør vores hverdag bedre,
-        vores hjem hyggeligere
-        og mit liv rigere.
-
-        <br><br>
-
-        Jeg glæder mig til alle de minder,
-        vi endnu ikke har skabt.
-
-    </div>
-
-    <div class="signature">
-        Jeg elsker dig ❤️<br>
-        Tobias
-    </div>
-
-    <div class="footer-icons">
-        🎄 ❤️ 🎁 ❤️ 🎄
-    </div>
-
-</div>
-`;
-
-document.getElementById("lightbox")
-.addEventListener("click", function(e) {
-
-    if (e.target === this) {
-        closeImage();
-    }
-
-});
-
-</script>
+    box-
