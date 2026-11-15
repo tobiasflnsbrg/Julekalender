@@ -22,6 +22,7 @@ body{
 
     font-family:Georgia, serif;
     text-align:center;
+
     color:white;
 
     background:
@@ -32,41 +33,77 @@ body{
 }
 
 .card{
-    max-width:800px;
+
     width:100%;
+    max-width:800px;
 
-    background:rgba(255,255,255,.1);
+    background:
+    rgba(255,255,255,0.10);
 
-    border:2px solid rgba(255,215,0,.4);
+    border:2px solid rgba(255,215,0,.35);
 
     border-radius:30px;
 
     padding:40px;
 
     box-shadow:
-    0 0 20px rgba(255,215,0,.2),
+    0 0 20px rgba(255,215,0,.15),
     0 10px 40px rgba(0,0,0,.3);
+
+    position:relative;
 }
 
-.header{
+.back-button{
+
+    display:inline-block;
+
+    margin-bottom:25px;
+
+    padding:12px 20px;
+
+    text-decoration:none;
+
     color:#ffe082;
-    margin-bottom:10px;
+
+    border:1px solid rgba(255,215,0,.4);
+
+    border-radius:15px;
+
+    background:rgba(255,215,0,.15);
+
+    transition:.3s;
+}
+
+.back-button:hover{
+
+    background:rgba(255,215,0,.25);
+
+    transform:translateY(-2px);
 }
 
 .heart{
+
     font-size:4rem;
+
     animation:pulse 2s infinite;
 }
 
 h1{
+
     color:#ffe082;
+}
+
+.subtitle{
+
+    color:#ffe082;
+
     margin-bottom:20px;
 }
 
 .photo{
 
-    max-width:350px;
     width:100%;
+    max-width:350px;
 
     border-radius:20px;
 
@@ -75,85 +112,124 @@ h1{
     cursor:pointer;
 
     transition:.3s;
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.2);
 }
 
 .photo:hover{
+
     transform:scale(1.03);
 }
 
 .photo-text{
+
     margin-top:10px;
+
     color:#ffe082;
-    font-size:0.9rem;
+
+    font-size:.9rem;
 }
 
 .message{
-    margin-top:25px;
+
+    margin-top:30px;
+
+    line-height:1.9;
+
     font-size:1.2rem;
-    line-height:1.8;
 }
 
 .signature{
+
     margin-top:30px;
+
     color:#ffe082;
+
     font-style:italic;
 }
 
 .footer{
+
     margin-top:30px;
+
     font-size:1.4rem;
 }
 
 .lightbox{
+
     display:none;
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.95);
+
+    background:rgba(0,0,0,.96);
 
     justify-content:center;
     align-items:center;
 
-    z-index:999;
+    z-index:9999;
 }
 
 .lightbox img{
+
     max-width:95%;
     max-height:95vh;
+
     border-radius:10px;
 }
 
 .close{
+
     position:absolute;
+
     top:20px;
     right:30px;
 
-    color:white;
     font-size:2rem;
+
     cursor:pointer;
+
+    color:white;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.1);
+    }
+
+    100%{
+        transform:scale(1);
+    }
 }
 
 </style>
+
 </head>
 <body>
 
 <div class="card">
 
+    <a href="index.html" class="back-button">
+        ⬅ Tilbage til julekalenderen
+    </a>
+
     <div class="heart">❤️</div>
 
-    <div class="header">
+    <div class="subtitle">
         🎄 Julen med Dig 🎄
     </div>
 
     <h1>2. december</h1>
 
     <img
-        src="images/IMG_20190713_203913.jpg"
+        src="IMG_20190713_203913.jpg"
         alt="Et særligt minde"
         class="photo"
         onclick="openImage()">
@@ -203,7 +279,7 @@ h1{
     <span class="close" onclick="closeImage()">✕</span>
 
     <img
-        src="images/IMG_20190713_203913.jpg"
+        src="IMG_20190713_203913.jpg"
         alt="Fuld størrelse">
 
 </div>
@@ -221,7 +297,7 @@ function closeImage() {
 document.getElementById("lightbox")
 .addEventListener("click", function(e){
 
-    if(e.target === this){
+    if (e.target === this){
         closeImage();
     }
 
