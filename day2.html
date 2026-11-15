@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>2. december ❤️</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Georgia',serif;
+    color:white;
+    text-align:center;
+    padding:20px;
+    overflow:hidden;
+
+    background:
+        radial-gradient(circle at top,
+            #b71c1c 0%,
+            #7f0000 45%,
+            #3e0000 100%);
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+      radial-gradient(white 2px, transparent 2px),
+      radial-gradient(white 1px, transparent 1px);
+
+    background-size:
+      120px 120px,
+      80px 80px;
+
+    opacity:.25;
+    animation:snow 20s linear infinite;
+}
+
+.card{
+    max-width:750px;
+    width:100%;
+
+    background:
+        rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    border:2px solid rgba(255,215,0,.35);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    box-shadow:
+        0 0 20px rgba(255,215,0,.15),
+        0 10px 40px rgba(0,0,0,.4);
+
+    position:relative;
+}
+
+.card::before{
+    content:"🎄";
+    position:absolute;
+    left:25px;
+    top:20px;
+    font-size:2rem;
+}
+
+.card::after{
+    content:"🎄";
+    position:absolute;
+    right:25px;
+    top:20px;
+    font-size:2rem;
+}
+
+h1{
+    color:#ffe082;
+    margin-bottom:20px;
+}
+
+.subtitle{
+    color:#ffe082;
+    margin-bottom:25px;
+}
+
+.heart{
+    font-size:4rem;
+    animation:pulse 2s infinite;
+}
+
+.lock{
+    font-size:5rem;
+}
+
+.message{
+    font-size:1.25rem;
+    line-height:1.9;
+}
+
+.signature{
+    margin-top:30px;
+    color:#ffe082;
+    font-style:italic;
+}
+
+.countdown{
+    margin-top:25px;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,215,0,.10);
+    border:1px solid rgba(255,215,0,.3);
+}
+
+.footer-icons{
+    margin-top:30px;
+    font-size:1.4rem;
+    letter-spacing:8px;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+@keyframes snow{
+    from{transform:translateY(-100px);}
+    to{transform:translateY(100px);}
+}
+
+</style>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script>
+
+const unlockDate = "2026-12-02";
+
+const today = new Intl.DateTimeFormat(
+    'en-CA',
+    {
+        timeZone:'Europe/Copenhagen',
+        year:'numeric',
+        month:'2-digit',
+        day:'2-digit'
+    }
+).format(new Date());
+
+function showLocked(){
+
+    document.getElementById("content").innerHTML = `
+    <div class="card">
+
+        <div class="lock">🔒</div>
+
+        <h1>Låge 2 er låst</h1>
+
+        <p>
+            Denne låge åbner først
+            <br>
+            <strong>2. december</strong>
+        </p>
+
+        <div id="countdown" class="countdown">
+            Beregner nedtælling...
+        </div>
+
+    </div>
+    `;
+
+    updateCountdown();
+    setInterval(updateCountdown,1000);
+}
+
+function updateCountdown(){
+
+    const now = new Date();
+
+    const unlock =
+  
