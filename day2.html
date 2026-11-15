@@ -8,28 +8,95 @@
 
 <style>
 
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(180deg,#8b0000,#c62828);
+    font-family:Georgia, serif;
     color:white;
     text-align:center;
     padding:20px;
-    box-sizing:border-box;
+    overflow-x:hidden;
+
+    background:
+    radial-gradient(circle at top,
+    #b71c1c 0%,
+    #7f0000 45%,
+    #3e0000 100%);
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    radial-gradient(white 2px, transparent 2px),
+    radial-gradient(white 1px, transparent 1px);
+
+    background-size:
+    120px 120px,
+    80px 80px;
+
+    opacity:.25;
+
+    animation:snow 20s linear infinite;
+
+    pointer-events:none;
 }
 
 .card{
-    max-width:650px;
+
+    max-width:800px;
     width:100%;
-    background:rgba(255,255,255,0.12);
+
+    background:rgba(255,255,255,.12);
+
     backdrop-filter:blur(10px);
-    border-radius:25px;
+
+    border:2px solid rgba(255,215,0,.35);
+
+    border-radius:30px;
+
     padding:40px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.15),
+    0 10px 40px rgba(0,0,0,.4);
+
+    position:relative;
+}
+
+.card::before{
+    content:"🎄";
+    position:absolute;
+    left:25px;
+    top:20px;
+    font-size:2rem;
+}
+
+.card::after{
+    content:"🎄";
+    position:absolute;
+    right:25px;
+    top:20px;
+    font-size:2rem;
+}
+
+h1{
+    color:#ffe082;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    color:#ffe082;
+    margin-bottom:25px;
 }
 
 .heart{
@@ -41,213 +108,70 @@ body{
     font-size:5rem;
 }
 
-h1{
-    margin-bottom:15px;
+.photo{
+    max-width:320px;
+    width:100%;
+
+    border-radius:20px;
+
+    border:4px solid rgba(255,215,0,.4);
+
+    margin:20px 0;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-shadow:
+    0 0 20px rgba(255,215,0,.3);
+}
+
+.photo:hover{
+    transform:scale(1.03);
+}
+
+.photo-text{
+    font-size:.9rem;
+    opacity:.8;
+    color:#ffe082;
 }
 
 .message{
-    font-size:1.2rem;
-    line-height:1.8;
+    font-size:1.25rem;
+    line-height:1.9;
+    margin-top:20px;
 }
 
 .signature{
-    margin-top:25px;
-    opacity:0.9;
+    margin-top:30px;
     font-style:italic;
+    color:#ffe082;
 }
 
 .countdown{
     margin-top:25px;
-    padding:15px;
-    border-radius:15px;
-    background:rgba(255,255,255,0.12);
-    font-size:1.2rem;
-    font-weight:bold;
+    padding:20px;
+    border-radius:20px;
+    background:rgba(255,215,0,.10);
+    border:1px solid rgba(255,215,0,.3);
 }
 
-@keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
+.footer-icons{
+    margin-top:30px;
+    font-size:1.4rem;
+    letter-spacing:8px;
 }
 
-</style>
-</head>
-<body>
+.lightbox{
 
-<div id="content"></div>
+    display:none;
 
-<script>
+    position:fixed;
 
-// ========= INDSTIL LÅGENS DATO HER =========
-const unlockDate = "2026-12-02";
-// ===========================================
+    inset:0;
 
-// Hent dato i dansk tidszone
-function getCopenhagenDateParts() {
+    background:rgba(0,0,0,.95);
 
-    const now = new Date();
+    z-index:9999;
 
-    const parts = new Intl.DateTimeFormat('en-CA', {
-        timeZone: 'Europe/Copenhagen',
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hourCycle: 'h23'
-    }).formatToParts(now);
-
-    let obj = {};
-
-    parts.forEach(part => {
-        obj[part.type] = part.value;
-    });
-
-    return obj;
-}
-
-
-// Dansk tidspunkt som Date-objekt
-function getCopenhagenNow() {
-
-    const p = getCopenhagenDateParts();
-
-    return new Date(
-        p.year,
-        Number(p.month)-1,
-        p.day,
-        p.hour,
-        p.minute,
-        p.second
-    );
-}
-
-
-const today = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'Europe/Copenhagen',
-    year:'numeric',
-    month:'2-digit',
-    day:'2-digit'
-}).format(new Date());
-
-
-// LÅST
-if (today < unlockDate) {
-
-    document.getElementById("content").innerHTML = `
-        <div class="card">
-            <div class="lock">🔒</div>
-
-            <h1>Låge 2 er låst</h1>
-
-            <p class="message">
-                Denne låge kan først åbnes<br>
-                <strong>2. december</strong> ❤️
-            </p>
-
-            <div id="countdown" class="countdown">
-                Beregner nedtælling...
-            </div>
-        </div>
-    `;
-
-    function updateCountdown() {
-
-        const copenhagenNow = getCopenhagenNow();
-
-        const unlock = new Date(
-            unlockDate + "T00:00:00"
-        );
-
-        const diff = unlock - copenhagenNow;
-
-        if(diff <= 0){
-            location.reload();
-            return;
-        }
-
-        const days = Math.floor(
-            diff / (1000*60*60*24)
-        );
-
-        const hours = Math.floor(
-            (diff % (1000*60*60*24))
-            / (1000*60*60)
-        );
-
-        const minutes = Math.floor(
-            (diff % (1000*60*60))
-            / (1000*60)
-        );
-
-        const seconds = Math.floor(
-            (diff % (1000*60))
-            / 1000
-        );
-
-        document.getElementById("countdown").innerHTML = `
-            ❤️ Vi er kun<br><br>
-            <strong>
-            ${days} dage<br>
-            ${hours} timer<br>
-            ${minutes} minutter<br>
-            ${seconds} sekunder
-            </strong>
-            <br><br>
-            fra næste lille kærlighedsbesked ❤️
-        `;
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown,1000);
-
-}
-
-// ÅBEN
-else {
-
-    document.getElementById("content").innerHTML = `
-        <div class="card">
-
-            <div class="heart">❤️</div>
-
-            <h1>2. december</h1>
-
-            <div class="message">
-
-                Hvis jeg kunne vælge mit liv én gang til,
-                ville jeg stadig vælge dig.
-
-                <br><br>
-
-                Ikke fordi alt altid er let,
-                men fordi alle de gode ting i mit liv
-                bliver bedre, når jeg deler dem med dig.
-
-                <br><br>
-
-                Tak for vores familie.
-                Tak for vores grin.
-                Tak for vores hverdag.
-
-                <br><br>
-
-                Og tak fordi du er dig.
-
-            </div>
-
-            <div class="signature">
-                Glædelig 2. december ❤️<br>
-                Kærlig hilsen Din Mand
-            </div>
-
-        </div>
-    `;
-}
-
-</script>
-
-</body>
-</html>
+    justify-content:
