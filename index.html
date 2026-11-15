@@ -15,90 +15,97 @@
 body{
     margin:0;
     min-height:100vh;
-    font-family:'Segoe UI',sans-serif;
+    padding:20px;
+
+    font-family:Georgia, serif;
+
     background:
-        radial-gradient(circle at top,
-        #c62828 0%,
-        #8b0000 40%,
-        #3e0000 100%);
+    radial-gradient(circle at top,
+    #c62828 0%,
+    #8b0000 50%,
+    #3e0000 100%);
+
     color:white;
 }
 
 .header{
     text-align:center;
-    padding:50px 20px 30px;
+    margin-bottom:40px;
 }
 
-h1{
+.header h1{
+    color:#ffe082;
     font-size:3rem;
     margin-bottom:10px;
-    color:#ffe082;
-    text-shadow:0 0 15px rgba(255,215,0,.5);
 }
 
-.subtitle{
+.header p{
     font-size:1.2rem;
-    color:#fff8e1;
-}
-
-.hero{
-    max-width:900px;
-    margin:auto;
-    padding:0 20px 40px;
-    text-align:center;
-}
-
-.hero-card{
-    background:rgba(255,255,255,.12);
-    border:2px solid rgba(255,215,0,.3);
-    border-radius:30px;
-    padding:30px;
-    backdrop-filter:blur(10px);
 }
 
 .calendar{
 
     max-width:1000px;
-    margin:40px auto;
+
+    margin:auto;
 
     display:grid;
+
     grid-template-columns:
-        repeat(auto-fit,minmax(120px,1fr));
+    repeat(auto-fit,minmax(120px,1fr));
 
     gap:15px;
-
-    padding:20px;
 }
 
 .door{
 
-    background:
-        linear-gradient(
-            145deg,
-            #d32f2f,
-            #b71c1c
-        );
+    min-height:120px;
 
-    border:2px solid rgba(255,215,0,.3);
+    text-decoration:none;
 
     border-radius:20px;
 
-    min-height:120px;
-
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
     align-items:center;
 
-    text-decoration:none;
-    color:white;
-
     transition:.3s;
+
+    border:2px solid rgba(255,215,0,.3);
 }
 
 .door:hover{
+
     transform:translateY(-5px);
-    box-shadow:0 10px 20px rgba(0,0,0,.3);
+}
+
+.unlocked{
+
+    background:
+    linear-gradient(
+    145deg,
+    #d32f2f,
+    #b71c1c
+    );
+
+    color:white;
+
+    cursor:pointer;
+}
+
+.locked{
+
+    background:
+    rgba(255,255,255,.08);
+
+    color:#ccc;
+
+    opacity:.65;
+
+    cursor:not-allowed;
 }
 
 .day{
@@ -111,103 +118,106 @@ h1{
     font-size:1.5rem;
 }
 
-.locked{
-    opacity:.55;
-    cursor:not-allowed;
-}
-
 .footer{
+
+    margin-top:40px;
+
     text-align:center;
-    padding:25px;
+
     color:#ffe082;
 }
 
-.snow{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    opacity:.20;
-    background-image:
-      radial-gradient(white 2px, transparent 2px);
-    background-size:120px 120px;
+.hero{
+
+    text-align:center;
+
+    max-width:900px;
+
+    margin:0 auto 40px auto;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    background:
+    rgba(255,255,255,.08);
+
+    border:2px solid
+    rgba(255,215,0,.2);
 }
 
 </style>
+
 </head>
+
 <body>
 
-<div class="snow"></div>
-
 <div class="header">
-    <h1>🎄 Julen med Dig ❤️</h1>
 
-    <div class="subtitle">
-        24 små påmindelser om,
-        hvorfor jeg elsker dig
-    </div>
+<h1>🎄 Julen med Dig ❤️</h1>
+
+<p>
+24 små påmindelser om,
+hvor meget du betyder for mig
+</p>
+
 </div>
 
 <div class="hero">
 
-    <div class="hero-card">
+<h2>Til min elskede ❤️</h2>
 
-        <h2>Til min elskede ❤️</h2>
-
-        <p>
-            Hver dag gemmer der sig en lille besked,
-            et minde, et smil eller en overraskelse.
-        </p>
-
-        <p>
-            Jeg håber denne kalender minder dig om,
-            hvor meget du betyder for mig.
-        </p>
-
-        <p>
-            Glædelig december 🎄
-        </p>
-
-    </div>
+<p>
+Bag hver låge gemmer der sig
+et minde, en kærlig tanke
+eller en lille overraskelse.
+</p>
 
 </div>
 
-<div class="calendar" id="calendar"></div>
+<div id="calendar" class="calendar"></div>
 
 <div class="footer">
-    ❤️ Tobias ❤️
+
+❤️ Tobias ❤️
+
 </div>
 
 <script>
 
-// DANSK TID
+// Dansk dato
+const copenhagenDate = new Date(
+    new Date().toLocaleString(
+        "en-US",
+        {
+            timeZone: "Europe/Copenhagen"
+        }
+    )
+);
 
-const today = new Intl.DateTimeFormat(
-    'en-CA',
-    {
-        timeZone:'Europe/Copenhagen',
-        year:'numeric',
-        month:'2-digit',
-        day:'2-digit'
-    }
-).format(new Date());
+const currentMonth =
+    copenhagenDate.getMonth() + 1;
 
 const currentDay =
-parseInt(today.split('-')[2]);
+    copenhagenDate.getDate();
 
 const calendar =
-document.getElementById('calendar');
+    document.getElementById("calendar");
 
-for(let day=1; day<=24; day++){
+for(let day = 1; day <= 24; day++){
 
-    const isOpen = currentDay >= day;
+    const door = document.createElement("a");
 
-    let door = document.createElement('a');
+    const unlocked =
+        currentMonth === 12 &&
+        currentDay >= day;
 
-    if(isOpen){
+    if(unlocked){
 
         door.href = `day${day}.html`;
 
-        door.className = 'door';
+        door.className =
+            "door unlocked";
 
         door.innerHTML = `
             <div class="day">
@@ -219,21 +229,22 @@ for(let day=1; day<=24; day++){
             </div>
         `;
 
-    }else{
+    }
+    else{
 
-        door.href = '#';
+        door.href = "#";
 
         door.className =
-            'door locked';
+            "door locked";
 
         door.onclick = function(e){
 
             e.preventDefault();
 
             alert(
-              'Denne låge åbner først den '
-              + day +
-              '. december ❤️'
+                "Denne låge åbner først den "
+                + day +
+                ". december ❤️"
             );
 
         };
