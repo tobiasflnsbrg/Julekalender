@@ -7,42 +7,29 @@
 <title>1. december ❤️</title>
 
 <style>
+
 body{
     margin:0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #8b0000, #c62828);
-    color:white;
     min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(180deg,#8b0000,#c62828);
+    color:white;
     text-align:center;
+    padding:20px;
+    box-sizing:border-box;
 }
 
 .card{
-    max-width:600px;
-    margin:20px;
+    max-width:650px;
+    width:100%;
     background:rgba(255,255,255,0.12);
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(10px);
+    border-radius:25px;
     padding:40px;
-    border-radius:20px;
     box-shadow:0 10px 30px rgba(0,0,0,0.3);
-}
-
-.date{
-    font-size:1.2rem;
-    opacity:0.9;
-}
-
-h1{
-    font-size:3rem;
-    margin:10px 0;
-}
-
-.message{
-    font-size:1.3rem;
-    line-height:1.8;
-    margin-top:30px;
 }
 
 .heart{
@@ -50,22 +37,217 @@ h1{
     animation:pulse 2s infinite;
 }
 
-@keyframes pulse{
-    0% {transform:scale(1);}
-    50% {transform:scale(1.15);}
-    100% {transform:scale(1);}
+.lock{
+    font-size:5rem;
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+.message{
+    font-size:1.2rem;
+    line-height:1.8;
 }
 
 .signature{
-    margin-top:30px;
-    font-style:italic;
+    margin-top:25px;
     opacity:0.9;
+    font-style:italic;
 }
+
+.countdown{
+    margin-top:25px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,0.12);
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
 </style>
 </head>
-
 <body>
 
-<div class="card">
+<div id="content"></div>
 
-<div class="heart
+<script>
+
+// ========= INDSTIL LÅGENS DATO HER =========
+const unlockDate = "2026-12-01";
+// ===========================================
+
+// Hent dato i dansk tidszone
+function getCopenhagenDateParts() {
+
+    const now = new Date();
+
+    const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Europe/Copenhagen',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23'
+    }).formatToParts(now);
+
+    let obj = {};
+
+    parts.forEach(part => {
+        obj[part.type] = part.value;
+    });
+
+    return obj;
+}
+
+
+// Dansk tidspunkt som Date-objekt
+function getCopenhagenNow() {
+
+    const p = getCopenhagenDateParts();
+
+    return new Date(
+        p.year,
+        Number(p.month)-1,
+        p.day,
+        p.hour,
+        p.minute,
+        p.second
+    );
+}
+
+
+const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Copenhagen',
+    year:'numeric',
+    month:'2-digit',
+    day:'2-digit'
+}).format(new Date());
+
+
+// LÅST
+if (today < unlockDate) {
+
+    document.getElementById("content").innerHTML = `
+        <div class="card">
+            <div class="lock">🔒</div>
+
+            <h1>Låge 1 er låst</h1>
+
+            <p class="message">
+                Denne låge kan først åbnes<br>
+                <strong>1. december</strong> ❤️
+            </p>
+
+            <div id="countdown" class="countdown">
+                Beregner nedtælling...
+            </div>
+        </div>
+    `;
+
+    function updateCountdown() {
+
+        const copenhagenNow = getCopenhagenNow();
+
+        const unlock = new Date(
+            unlockDate + "T00:00:00"
+        );
+
+        const diff = unlock - copenhagenNow;
+
+        if(diff <= 0){
+            location.reload();
+            return;
+        }
+
+        const days = Math.floor(
+            diff / (1000*60*60*24)
+        );
+
+        const hours = Math.floor(
+            (diff % (1000*60*60*24))
+            / (1000*60*60)
+        );
+
+        const minutes = Math.floor(
+            (diff % (1000*60*60))
+            / (1000*60)
+        );
+
+        const seconds = Math.floor(
+            (diff % (1000*60))
+            / 1000
+        );
+
+        document.getElementById("countdown").innerHTML = `
+            ❤️ Vi er kun<br><br>
+            <strong>
+            ${days} dage<br>
+            ${hours} timer<br>
+            ${minutes} minutter<br>
+            ${seconds} sekunder
+            </strong>
+            <br><br>
+            fra næste lille kærlighedsbesked ❤️
+        `;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown,1000);
+
+}
+
+// ÅBEN
+else {
+
+    document.getElementById("content").innerHTML = `
+        <div class="card">
+
+            <div class="heart">❤️</div>
+
+            <h1>1. december</h1>
+
+            <div class="message">
+
+                Hvis jeg kunne vælge mit liv én gang til,
+                ville jeg stadig vælge dig.
+
+                <br><br>
+
+                Ikke fordi alt altid er let,
+                men fordi alle de gode ting i mit liv
+                bliver bedre, når jeg deler dem med dig.
+
+                <br><br>
+
+                Tak for vores familie.
+                Tak for vores grin.
+                Tak for vores hverdag.
+
+                <br><br>
+
+                Og tak fordi du er dig.
+
+            </div>
+
+            <div class="signature">
+                Glædelig 1. december ❤️<br>
+                Kærlig hilsen Tobias
+            </div>
+
+        </div>
+    `;
+}
+
+</script>
+
+</body>
+</html>
