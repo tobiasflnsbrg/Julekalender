@@ -183,5 +183,86 @@ eller en lille overraskelse.
 
 </div>
 
+    <script>
+
+// Dansk dato
+const copenhagenDate = new Date(
+    new Date().toLocaleString(
+        "en-US",
+        {
+            timeZone: "Europe/Copenhagen"
+        }
+    )
+);
+
+const currentMonth =
+    copenhagenDate.getMonth() + 1;
+
+const currentDay =
+    copenhagenDate.getDate();
+
+const calendar =
+    document.getElementById("calendar");
+
+for(let day = 1; day <= 24; day++){
+
+    const door = document.createElement("a");
+
+    const unlocked =
+        currentMonth === 12 &&
+        currentDay >= day;
+
+    if(unlocked){
+
+        door.href = `day${day}.html`;
+
+        door.className =
+            "door unlocked";
+
+        door.innerHTML = `
+            <div class="day">
+                ${day}
+            </div>
+
+            <div class="icon">
+                🎁
+            </div>
+        `;
+
+    }
+    else{
+
+        door.href = "#";
+
+        door.className =
+            "door locked";
+
+        door.onclick = function(e){
+
+            e.preventDefault();
+
+            alert(
+                "Denne låge åbner først den "
+                + day +
+                ". december ❤️"
+            );
+
+        };
+
+        door.innerHTML = `
+            <div class="day">
+                ${day}
+            </div>
+
+            <div class="icon">
+                🔒
+            </div>
+        `;
+    }
+
+    calendar.appendChild(door);
+}
+
+</script>
 </body>
 </html>
