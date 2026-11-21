@@ -3,177 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Julen med Dig ❤️</title>
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 20px;
-    overflow-x: hidden;
-    font-family: Georgia, serif;
-    color: white;
-    background: radial-gradient(circle at top, #c62828 0%, #790000 50%, #250000 100%);
+body{
+    margin:0;
+    padding:15px;
+    min-height:100vh;
+
+    font-family:Georgia, serif;
+    color:white;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #c62828 0%,
+        #790000 50%,
+        #250000 100%
+    );
 }
 
-.snow {
-    position: fixed;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
+.snow{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:0;
 }
 
-.snowflake {
-    position: absolute;
-    top: -40px;
-    color: white;
-    opacity: 0.7;
-    animation: fall linear infinite;
+.snowflake{
+    position:absolute;
+    top:-30px;
+    color:white;
+    opacity:.7;
+    animation:fall linear infinite;
 }
 
-.snowflake:nth-child(1) { left: 5%; font-size: 20px; animation-duration: 10s; }
-.snowflake:nth-child(2) { left: 18%; font-size: 14px; animation-duration: 13s; animation-delay: -4s; }
-.snowflake:nth-child(3) { left: 32%; font-size: 24px; animation-duration: 12s; animation-delay: -7s; }
-.snowflake:nth-child(4) { left: 48%; font-size: 16px; animation-duration: 9s; animation-delay: -2s; }
-.snowflake:nth-child(5) { left: 63%; font-size: 22px; animation-duration: 14s; animation-delay: -8s; }
-.snowflake:nth-child(6) { left: 77%; font-size: 15px; animation-duration: 11s; animation-delay: -5s; }
-.snowflake:nth-child(7) { left: 91%; font-size: 25px; animation-duration: 13s; animation-delay: -10s; }
+.snowflake:nth-child(1){left:5%;font-size:20px;animation-duration:10s;}
+.snowflake:nth-child(2){left:18%;font-size:14px;animation-duration:12s;}
+.snowflake:nth-child(3){left:32%;font-size:24px;animation-duration:13s;}
+.snowflake:nth-child(4){left:48%;font-size:18px;animation-duration:9s;}
+.snowflake:nth-child(5){left:62%;font-size:22px;animation-duration:14s;}
+.snowflake:nth-child(6){left:78%;font-size:16px;animation-duration:11s;}
+.snowflake:nth-child(7){left:92%;font-size:25px;animation-duration:12s;}
 
-@keyframes fall {
-    from {
-        transform: translateY(0) rotate(0deg);
+@keyframes fall{
+    from{
+        transform:translateY(0);
     }
-    to {
-        transform: translateY(110vh) rotate(360deg);
+    to{
+        transform:translateY(110vh);
     }
 }
 
-.content {
-    position: relative;
-    z-index: 1;
-    max-width: 1000px;
-    margin: auto;
+.content{
+    position:relative;
+    z-index:1;
+    max-width:1000px;
+    margin:auto;
 }
 
-.lights {
-    text-align: center;
-    font-size: clamp(1rem, 4vw, 1.8rem);
-    letter-spacing: 5px;
-    margin-bottom: 20px;
+.test-banner{
+    background:#ffeb3b;
+    color:black;
+    padding:12px;
+    border-radius:15px;
+    text-align:center;
+    margin-bottom:20px;
+    font-weight:bold;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 30px;
+.header{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.header h1 {
-    color: #ffe082;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    margin: 10px 0;
-    text-shadow: 0 2px 15px rgba(255,215,0,.4);
+.header h1{
+    margin:0;
+    color:#ffe082;
+    font-size:clamp(2rem,6vw,3.5rem);
 }
 
-.header p {
-    font-size: 1.2rem;
-    line-height: 1.6;
+.header p{
+    font-size:1.1rem;
+    line-height:1.5;
 }
 
-.hero {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto 30px;
-    padding: 25px;
-    border-radius: 30px;
-    background: rgba(255,255,255,.08);
-    border: 2px solid rgba(255,215,0,.35);
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+.hero{
+    background:rgba(255,255,255,.08);
+    border:2px solid rgba(255,215,0,.25);
+    border-radius:25px;
+    padding:20px;
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.hero h2 {
-    color: #ffe082;
-    margin-top: 0;
+.hero h2{
+    color:#ffe082;
+    margin-top:0;
 }
 
-.hero p {
-    line-height: 1.7;
+.countdown{
+    color:#ffe082;
+    font-weight:bold;
 }
 
-.countdown {
-    color: #ffe082;
-    font-weight: bold;
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
-.calendar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-    gap: 25px;
-    padding: 10px;
-}
+.door{
+    min-height:110px;
 
-.door {
-    min-height: 120px;
-    padding: 15px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-decoration:none;
+    color:white;
 
-    gap: 8px;
-
-    text-decoration: none;
-    color: white;
-
-    border-radius: 20px;
-    border: 2px solid rgba(255,215,0,.4);
-
-    background: linear-gradient(
+    background:
+    linear-gradient(
         145deg,
         #e53935,
         #a50000
     );
 
-    transform:
-        translate(var(--x,0px),var(--y,0px))
-        rotate(var(--rotation,0deg));
+    border-radius:20px;
+    border:2px solid rgba(255,215,0,.3);
 
-    transition: .3s;
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,.25);
-}
-
-.door:hover {
-    transform:
-        translate(var(--x,0px),
-        calc(var(--y,0px) - 5px))
-        rotate(var(--rotation,0deg));
+    transition:.2s;
 
     box-shadow:
-        0 5px 20px rgba(255,215,0,.45);
+    0 5px 15px rgba(0,0,0,.25);
+
+    touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
 }
 
-.day {
-    font-size: 2rem;
-    font-weight: bold;
+.door:hover{
+    transform:translateY(-3px);
 }
 
-.icon {
-    font-size: 1.5rem;
+.day{
+    font-size:2rem;
+    font-weight:bold;
 }
 
-.footer {
-    margin: 40px 0 10px;
-    text-align: center;
-    color: #ffe082;
-    line-height: 1.8;
+.icon{
+    margin-top:8px;
+    font-size:1.4rem;
+}
+
+.footer{
+    margin-top:30px;
+    text-align:center;
+    color:#ffe082;
+    line-height:1.8;
+}
+
+/* Tablet */
+
+@media(max-width:768px){
+
+    .calendar{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .door{
+        min-height:95px;
+    }
+
+    .day{
+        font-size:1.7rem;
+    }
+}
+
+/* Mobil */
+
+@media(max-width:480px){
+
+    .calendar{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .door{
+        min-height:90px;
+    }
+
+    .day{
+        font-size:1.5rem;
+    }
+
+    .icon{
+        font-size:1.2rem;
+    }
+
+    .hero{
+        padding:15px;
+    }
+
+    .header p{
+        font-size:1rem;
+    }
 }
 
 </style>
@@ -191,178 +232,141 @@ body {
     <span class="snowflake">❄</span>
 </div>
 
-<main class="content">
+<div class="content">
 
-    <div class="lights">
-        ✨ 🔴 🟡 🟢 🔴 🟡 🟢 ✨
-    </div>
+    <div id="testBanner"></div>
 
-    <header class="header">
+    <div class="header">
         <h1>🎄 Julen med Dig ❤️</h1>
 
         <p>
             24 små påmindelser om<br>
             hvor meget du betyder for mig
         </p>
-    </header>
+    </div>
 
-    <section class="hero">
+    <div class="hero">
 
         <h2>Til min elskede ❤️</h2>
 
         <p>
-            Bag hver låge gemmer der sig<br>
-            et minde, en kærlig tanke<br>
-            eller en lille overraskelse.
+            Bag hver låge gemmer der sig et minde,
+            en kærlig tanke eller en lille overraskelse.
         </p>
 
-        <p class="countdown" id="countdown"></p>
+        <div id="countdown" class="countdown"></div>
 
-    </section>
+    </div>
 
-    <section id="calendar" class="calendar"></section>
+    <div id="calendar" class="calendar"></div>
 
-    <footer class="footer">
+    <div class="footer">
         Lavet med kærlighed ❤️<br>
         🎁 Tobias 🎁
-    </footer>
+    </div>
 
-</main>
+</div>
 
 <script>
 
-// København-tid
-const dateParts = new Intl.DateTimeFormat(
-    "en-GB",
-    {
-        timeZone: "Europe/Copenhagen",
-        month: "numeric",
-        day: "numeric"
-    }
-).formatToParts(new Date());
+// =====================
+// TESTTILSTAND
+// =====================
 
-function getDatePart(type) {
-    return Number(
-        dateParts.find(
-            part => part.type === type
-        ).value
+const TEST_MODE = true;
+
+const TEST_MONTH = 12;
+const TEST_DAY = 10;
+
+// =====================
+
+let currentMonth;
+let currentDay;
+
+if(TEST_MODE){
+
+    currentMonth = TEST_MONTH;
+    currentDay = TEST_DAY;
+
+    document.getElementById("testBanner")
+    .innerHTML = `
+        <div class="test-banner">
+            🧪 TESTTILSTAND:
+            ${TEST_DAY}. december
+        </div>
+    `;
+
+}else{
+
+    const cph = new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            timeZone:"Europe/Copenhagen",
+            month:"numeric",
+            day:"numeric"
+        }
+    ).formatToParts(new Date());
+
+    currentMonth =
+    Number(
+        cph.find(p =>
+        p.type==="month").value
+    );
+
+    currentDay =
+    Number(
+        cph.find(p =>
+        p.type==="day").value
     );
 }
 
-const currentMonth =
-    getDatePart("month");
-
-const currentDay =
-    getDatePart("day");
-
-const calendar =
-    document.getElementById("calendar");
-
 const countdown =
-    document.getElementById("countdown");
-
-// Nedtælling
-
-if(currentMonth === 12 && currentDay < 24){
-
-    const daysLeft =
-        24 - currentDay;
-
-    countdown.textContent =
-        "🎄 Kun " +
-        daysLeft +
-        (daysLeft === 1
-            ? " dag"
-            : " dage") +
-        " til juleaften!";
-
-}
-else if(currentMonth === 12 &&
-        currentDay === 24){
-
-    countdown.textContent =
-        "🎄 Glædelig juleaften ❤️";
-
-}
-else{
-
-    countdown.textContent =
-        "✨ Julemagi er på vej ✨";
-}
-
-// Opret kun tidligere og aktuelle låger
-
-const days = [];
+document.getElementById("countdown");
 
 if(currentMonth === 12){
 
-    for(let i = 1;
-        i <= Math.min(currentDay,24);
-        i++){
+    if(currentDay < 24){
 
-        days.push(i);
+        const daysLeft =
+        24 - currentDay;
+
+        countdown.textContent =
+        `🎄 Kun ${daysLeft} dage til juleaften`;
+
+    }else{
+
+        countdown.textContent =
+        "🎄 Glædelig jul ❤️";
     }
-
 }
 
-// Bland rækkefølgen
+const calendar =
+document.getElementById("calendar");
 
-for(let i = days.length - 1;
-    i > 0;
-    i--){
-
-    const j =
-        Math.floor(
-            Math.random()
-            * (i + 1)
-        );
-
-    [days[i], days[j]] =
-        [days[j], days[i]];
-}
-
-// Vis låger
-
-for(const day of days){
+for(
+    let day = 1;
+    day <= Math.min(currentDay,24);
+    day++
+){
 
     const door =
-        document.createElement("a");
-
-    const randomX =
-        Math.floor(Math.random() * 11) - 5;
-
-    const randomY =
-        Math.floor(Math.random() * 11) - 5;
-
-    const randomRotation =
-        Math.floor(Math.random() * 9) - 4;
-
-    door.style.setProperty(
-        "--x",
-        randomX + "px"
-    );
-
-    door.style.setProperty(
-        "--y",
-        randomY + "px"
-    );
-
-    door.style.setProperty(
-        "--rotation",
-        randomRotation +
-        "deg"
-    );
-
-    door.className = "door";
+    document.createElement("a");
 
     door.href =
-        "day" + day + ".html";
+    `day${day}.html`;
 
-    door.innerHTML =
-        '<span class="day">' +
-        day +
-        '</span>' +
-        '<span class="icon">🎁</span>';
+    door.className =
+    "door";
+
+    door.innerHTML = `
+        <div class="day">
+            ${day}
+        </div>
+
+        <div class="icon">
+            🎁
+        </div>
+    `;
 
     calendar.appendChild(door);
 }
