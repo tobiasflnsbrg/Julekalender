@@ -16,10 +16,8 @@ body{
     margin:0;
     padding:15px;
     min-height:100vh;
-
     font-family:Georgia, serif;
     color:white;
-
     background:
     radial-gradient(
         circle at top,
@@ -32,8 +30,8 @@ body{
 .snow{
     position:fixed;
     inset:0;
-    pointer-events:none;
     overflow:hidden;
+    pointer-events:none;
     z-index:0;
 }
 
@@ -54,12 +52,8 @@ body{
 .snowflake:nth-child(7){left:92%;font-size:25px;animation-duration:12s;}
 
 @keyframes fall{
-    from{
-        transform:translateY(0);
-    }
-    to{
-        transform:translateY(110vh);
-    }
+    from{transform:translateY(0);}
+    to{transform:translateY(110vh);}
 }
 
 .content{
@@ -122,12 +116,10 @@ body{
 
 .door{
     min-height:110px;
-
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-
     text-decoration:none;
     color:white;
 
@@ -152,6 +144,25 @@ body{
 
 .door:hover{
     transform:translateY(-3px);
+}
+
+.today{
+    border:3px solid #ffd700;
+
+    box-shadow:
+        0 0 10px rgba(255,215,0,.7),
+        0 0 25px rgba(255,215,0,.4),
+        0 5px 15px rgba(0,0,0,.3);
+}
+
+.today .icon{
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
 }
 
 .day{
@@ -269,16 +280,44 @@ body{
 
 <script>
 
-// =====================
+// ======================
 // TESTTILSTAND
-// =====================
+// ======================
 
 const TEST_MODE = true;
 
+// ÆNDRES VED TEST
 const TEST_MONTH = 12;
 const TEST_DAY = 24;
 
-// =====================
+// ======================
+
+const pages = {
+    1: "01-vinterfugl-a7k2.html",
+    2: "02-grantrae-p4m8.html",
+    3: "03-julehjerte-x9d1.html",
+    4: "04-mistelten-q2v7.html",
+    5: "05-julesok-r8k3.html",
+    6: "06-julelys-f5n9.html",
+    7: "07-mandler-h6t2.html",
+    8: "08-stjernedrys-z4p1.html",
+    9: "09-snefnug-k8w7.html",
+    10: "10-jordbaerminde-m2x5.html",
+    11: "11-julefred-u7h3.html",
+    12: "12-halvvejs-b4n8.html",
+    13: "13-ventetid-c9r2.html",
+    14: "14-floedebolle-y7k5.html",
+    15: "15-kaerlighed-p8m1.html",
+    16: "16-styrke-v3x9.html",
+    17: "17-sammen-q4h7.html",
+    18: "18-eventyr-r2k8.html",
+    19: "19-hjemmejul-n6p4.html",
+    20: "20-pullupbar-f7w2.html",
+    21: "21-grips-g8x1.html",
+    22: "22-fremtid-z3h6.html",
+    23: "23-snartjul-c5m9.html",
+    24: "24-mithjerte-k7v2.html"
+};
 
 let currentMonth;
 let currentDay;
@@ -288,8 +327,7 @@ if(TEST_MODE){
     currentMonth = TEST_MONTH;
     currentDay = TEST_DAY;
 
-    document.getElementById("testBanner")
-    .innerHTML = `
+    document.getElementById("testBanner").innerHTML = `
         <div class="test-banner">
             🧪 TESTTILSTAND:
             ${TEST_DAY}. december
@@ -308,16 +346,10 @@ if(TEST_MODE){
     ).formatToParts(new Date());
 
     currentMonth =
-    Number(
-        cph.find(p =>
-        p.type==="month").value
-    );
+    Number(cph.find(p => p.type==="month").value);
 
     currentDay =
-    Number(
-        cph.find(p =>
-        p.type==="day").value
-    );
+    Number(cph.find(p => p.type==="day").value);
 }
 
 const countdown =
@@ -336,7 +368,7 @@ if(currentMonth === 12){
     }else{
 
         countdown.textContent =
-        "🎄 Glædelig jul ❤️";
+        "🎄 Glædelig juleaften ❤️";
     }
 }
 
@@ -352,11 +384,21 @@ for(
     const door =
     document.createElement("a");
 
+    const isToday =
+    day === currentDay;
+
     door.href =
-    `day${day}.html`;
+    pages[day];
 
     door.className =
-    "door";
+    isToday
+        ? "door today"
+        : "door";
+
+    const icon =
+    isToday
+        ? "✨"
+        : "🎁";
 
     door.innerHTML = `
         <div class="day">
@@ -364,7 +406,7 @@ for(
         </div>
 
         <div class="icon">
-            🎁
+            ${icon}
         </div>
     `;
 
